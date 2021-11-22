@@ -187,7 +187,7 @@ impl Config {
             dbname: None,
             options: None,
             application_name: None,
-            replication: None
+            replication: None,
             ssl_mode: SslMode::Prefer,
             host: vec![],
             port: vec![],
