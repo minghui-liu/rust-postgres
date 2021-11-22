@@ -210,6 +210,18 @@ impl Config {
         self.config.get_hosts()
     }
 
+    /// Sets the replicaiton option
+    pub fn replication(&mut self, replication: &str) -> &mut Config {
+        self.config.replication(dbname);
+        self
+    }
+
+    /// Gets the value of the replication option 
+    pub fn get_replication(&self) -> Option<&str> {
+        self.config.get_replication()
+    }
+
+
     /// Adds a Unix socket host to the configuration.
     ///
     /// Unlike `host`, this method allows non-UTF8 paths.

@@ -187,6 +187,7 @@ impl Config {
             dbname: None,
             options: None,
             application_name: None,
+            replication: None
             ssl_mode: SslMode::Prefer,
             host: vec![],
             port: vec![],
@@ -240,6 +241,15 @@ impl Config {
     /// with the `dbname` method.
     pub fn get_dbname(&self) -> Option<&str> {
         self.dbname.as_deref()
+    }
+
+    pub fn replication(&mut self, replication: &str) -> &mut Config {
+        self.replication = Some(replication.to_string());
+        self
+    }
+
+    pub fn get_replication(&self) -> Option<&str> {
+        self.replication.as_deref()
     }
 
     /// Sets command line options used to configure the server.
