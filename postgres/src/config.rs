@@ -183,6 +183,17 @@ impl Config {
         self.config.get_application_name()
     }
 
+    /// Sets the remote option
+    pub fn remote(&mut self, remote: &str) -> &mut Config {
+        self.config.remote(remote);
+        self
+    }
+
+    /// Gets the value of the remote option 
+    pub fn get_remote(&self) -> Option<&str> {
+        self.config.get_remote()
+    }
+
     /// Sets the SSL configuration.
     ///
     /// Defaults to `prefer`.
@@ -209,18 +220,6 @@ impl Config {
     pub fn get_hosts(&self) -> &[Host] {
         self.config.get_hosts()
     }
-
-    /// Sets the replicaiton option
-    pub fn replication(&mut self, replication: &str) -> &mut Config {
-        self.config.replication(dbname);
-        self
-    }
-
-    /// Gets the value of the replication option 
-    pub fn get_replication(&self) -> Option<&str> {
-        self.config.get_replication()
-    }
-
 
     /// Adds a Unix socket host to the configuration.
     ///

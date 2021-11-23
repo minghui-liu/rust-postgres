@@ -161,6 +161,7 @@ pub struct Config {
     pub(crate) dbname: Option<String>,
     pub(crate) options: Option<String>,
     pub(crate) application_name: Option<String>,
+    pub(crate) remote: Option<String>,
     pub(crate) ssl_mode: SslMode,
     pub(crate) host: Vec<Host>,
     pub(crate) port: Vec<u16>,
@@ -187,7 +188,7 @@ impl Config {
             dbname: None,
             options: None,
             application_name: None,
-            replication: None,
+            remote: None,
             ssl_mode: SslMode::Prefer,
             host: vec![],
             port: vec![],
@@ -243,13 +244,13 @@ impl Config {
         self.dbname.as_deref()
     }
 
-    pub fn replication(&mut self, replication: &str) -> &mut Config {
-        self.replication = Some(replication.to_string());
+    pub fn remote(&mut self, remote: &str) -> &mut Config {
+        self.remote = Some(remote.to_string());
         self
     }
 
-    pub fn get_replication(&self) -> Option<&str> {
-        self.replication.as_deref()
+    pub fn get_remote(&self) -> Option<&str> {
+        self.remote.as_deref()
     }
 
     /// Sets command line options used to configure the server.
@@ -437,6 +438,9 @@ impl Config {
             "application_name" => {
                 self.application_name(&value);
             }
+            "remote" => {
+                self.remote(&value);
+            }
             "sslmode" => {
                 let mode = match value {
                     "disable" => SslMode::Disable,
@@ -584,6 +588,7 @@ impl fmt::Debug for Config {
             .field("dbname", &self.dbname)
             .field("options", &self.options)
             .field("application_name", &self.application_name)
+            .field("remote", &self.remote)
             .field("ssl_mode", &self.ssl_mode)
             .field("host", &self.host)
             .field("port", &self.port)
