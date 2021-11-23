@@ -124,6 +124,9 @@ where
     if let Some(application_name) = &config.application_name {
         params.push(("application_name", &**application_name));
     }
+    if let Some(remote) = &config.remote {
+        params.push(("remote", &**remote));
+    }
     if let Some(replication_mode) = &config.replication_mode {
         match replication_mode {
             ReplicationMode::Physical => params.push(("replication", "true")),
